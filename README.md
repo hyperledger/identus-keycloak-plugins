@@ -1,6 +1,7 @@
 # Identus Keycloak Plugins
 
 ![unit-tests](https://github.com/hyperledger/identus-keycloak-plugins/actions/workflows/unit-tests.yml/badge.svg)
+![GitHub Release](https://img.shields.io/github/v/release/hyperledger/identus-keycloak-plugins)
 
 # Overview
 
