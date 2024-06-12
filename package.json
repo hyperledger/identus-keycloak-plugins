@@ -1,0 +1,61 @@
+{
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "semantic-release": "^24.0.0"
+  },
+  "release": {
+    "branches": [
+      {
+        "name": "main"
+      },
+      {
+        "name": "prerelease/*",
+        "prerelease": "snapshot.${name.replace(\"prerelease/\", \"\")}"
+      }
+    ],
+    "tagFormat": "v${version}",
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/exec",
+        {
+          "prepareCmd": "npm version ${nextRelease.version} --git-tag-version false"
+        }
+      ],
+      [
+        "@semantic-release/exec",
+        {
+          "prepareCmd": "sbt \"release release-version ${nextRelease.version} next-version ${nextRelease.version}-SNAPSHOT with-defaults\""
+        }
+      ],
+      [
+        "@semantic-release/exec",
+        {
+          "prepareCmd": "docker buildx build --platform=linux/arm64,linux/amd64 -f Dockerfile-ci --push -t ghcr.io/patlo-iog/identus-keycloak-plugins:${nextRelease.version} ."
+        }
+      ],
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "CHANGELOG.md"
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "version.sbt",
+            "CHANGELOG.md",
+            "package.json",
+            "package-lock.json"
+          ],
+          "message": "chore(release): cut Identus Keycloak plugin ${nextRelease.version} release\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
+  },
+  "version": "0.1.2"
+}

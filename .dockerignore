@@ -1,0 +1,5 @@
+.bsp/
+.idea/
+target/
+!target/*.jar
+node_modules/
