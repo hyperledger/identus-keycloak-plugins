@@ -7,7 +7,7 @@ val V = new {
 }
 
 lazy val commonSettings = Seq(
-  githubOwner := "patlo-iog",
+  githubOwner := "hyperledger",
   githubRepository := "identus-keycloak-plugins"
 )
 
