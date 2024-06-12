@@ -78,7 +78,7 @@ for customization using JAR providers.
 
 ## `identus-keycloak-oid4vci`
 
-Extends Keycloak for integration with Identus cloud agent in [OID4VCI](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html) flow.
+Extends Keycloak for integration with Hyperledger Identus Cloud Agent in [OID4VCI](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html) flow.
 The Keycloak instance to use this is the Issuer Authorization Server where the plugin takes care of
 the OpenID extension in the issuance flow.
 The plugin supports the Authorization Endpoint and Token Endpoint according to the specification.
@@ -99,4 +99,4 @@ Additionally, the plugin communicates with the cloud agent during holder authori
 
 |Name|Description|
 |-|-|
-|`IDENTUS_URL`|URL of the Identus cloud agent to coordinate the issuance session.|
+|`IDENTUS_URL`|URL of the Identus Cloud Agent to coordinate the issuance session.|
