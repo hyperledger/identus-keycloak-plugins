@@ -7,9 +7,6 @@ on:
       - "main"
   pull_request:
 
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 jobs:
   build-and-unit-tests:
     name: "Build and unit tests"
