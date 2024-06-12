@@ -34,7 +34,7 @@
       [
         "@semantic-release/exec",
         {
-          "prepareCmd": "docker buildx build --platform=linux/arm64,linux/amd64 -f Dockerfile-ci --push -t ghcr.io/patlo-iog/identus-keycloak-plugins:${nextRelease.version} ."
+          "prepareCmd": "docker buildx build --platform=linux/arm64,linux/amd64 -f Dockerfile-ci --push -t ghcr.io/hyperledger/identus-keycloak-plugins:${nextRelease.version} ."
         }
       ],
       [
