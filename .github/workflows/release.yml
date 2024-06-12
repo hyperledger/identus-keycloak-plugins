@@ -20,8 +20,9 @@ on:
 jobs:
   release:
     env:
-      GITHUB_ACTOR: ${{ secrets.ATALA_GITHUB_ACTOR }}
-      GITHUB_TOKEN: ${{ secrets.ATALA_GITHUB_TOKEN }}
+      GITHUB_ACTOR: "hyperledger-bot"
+      GITHUB_ACTOR_EMAIL: "hyperledger-bot@hyperledger.org"
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -42,7 +43,8 @@ jobs:
       - uses: crazy-max/ghaction-import-gpg@v3
         id: import_gpg
         with:
-          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg-private-key: ${{ secrets.HYP_BOT_GPG_PRIVATE }}
+          passphrase: ${{ secrets.HYP_BOT_GPG_PASSWORD }}
           git-user-signingkey: true
           git-commit-gpgsign: true
       - name: Login to GitHub Container Registry
@@ -61,7 +63,7 @@ jobs:
           GIT_COMMITTER_EMAIL: ${{ steps.import_gpg.outputs.email }}
           GIT_AUTHOR_NAME: ${{ steps.import_gpg.outputs.name }}
           GIT_COMMITTER_NAME: ${{ steps.import_gpg.outputs.name }}
-          GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.IDENTUS_CI }}
         run: |
           npm install
           npx semantic-release
