@@ -43,10 +43,12 @@ jobs:
       - uses: crazy-max/ghaction-import-gpg@v3
         id: import_gpg
         with:
-          gpg-private-key: ${{ secrets.TMP_GPG_PRIVATE }}
-          # passphrase: ${{ secrets.HYP_BOT_GPG_PASSWORD }}
+          gpg-private-key: ${{ secrets.HYP_BOT_GPG_PRIVATE }}
+          passphrase: ${{ secrets.HYP_BOT_GPG_PASSWORD }}
           git-user-signingkey: true
           git-commit-gpgsign: true
+          git_config_global: true
+          git_tag_gpgsign: true
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
