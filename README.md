@@ -5,7 +5,8 @@
 
 # Overview
 
-This repository provides a Keycloak Plugin that extends Keycloak's functionality to handle Self-Sovereign Identity (SSI) tasks,
+This repository provides a Keycloak Plugin that extends Keycloak's functionality to handle Self-Sovereign Identity (SSI)
+tasks,
 including OpenID for verifiable credential issuance.
 
 # Getting started
@@ -16,8 +17,10 @@ including OpenID for verifiable credential issuance.
 
 The plugin is available as a pre-bundled Docker image.
 This image includes Keycloak and the plugin enabled for basic use cases.
-For a more complex setup, the JAR file published in the Maven repository should be used to build a custom Keycloak image.
-The docker-compose configuration below allows spinning up a basic Keycloak instance with the plugin enabled as part of the Identus cloud agent stack.
+For a more complex setup, the JAR file published in the Maven repository should be used to build a custom Keycloak
+image.
+The docker-compose configuration below allows spinning up a basic Keycloak instance with the plugin enabled as part of
+the Identus cloud agent stack.
 
 ```yaml
 services:
@@ -68,8 +71,10 @@ for customization using JAR providers.
 
 ## Using published JAR
 
-Each plugin is available individually on [Github maven packages](https://github.com/orgs/hyperledger/packages?repo_name=identus-keycloak-plugins),
-for easy integration with your build process and fine-grained control over which plugins are included when customizing Keycloak.
+Each plugin is available individually
+on [Github maven packages](https://github.com/orgs/hyperledger/packages?repo_name=identus-keycloak-plugins),
+for easy integration with your build process and fine-grained control over which plugins are included when customizing
+Keycloak.
 
 Please refer to the official [Keycloak documentation](https://www.keycloak.org/server/containers)
 for customization using JAR providers.
@@ -78,25 +83,27 @@ for customization using JAR providers.
 
 ## `identus-keycloak-oid4vci`
 
-Extends Keycloak for integration with Hyperledger Identus Cloud Agent in [OID4VCI](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html) flow.
+Extends Keycloak for integration with Hyperledger Identus Cloud Agent
+in [OID4VCI](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html) flow.
 The Keycloak instance to use this is the Issuer Authorization Server where the plugin takes care of
 the OpenID extension in the issuance flow.
 The plugin supports the Authorization Endpoint and Token Endpoint according to the specification.
-Additionally, the plugin communicates with the cloud agent during holder authorization to coordinate the issuance session.
+Additionally, the plugin communicates with the cloud agent during holder authorization to coordinate the issuance
+session.
 
 ### Features
 
 - [Authorization code flow](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-authorization-code-flow)
-  - _AuthorizationRequest_ supported parameters
-    - [`issuer_state`](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#section-5.1.3-2.3)
-  - _TokenResponse_ supported parameters
-    - [`c_nonce`](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#section-6.2-4.1)
-    - [`c_nonce_expires_in`](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#section-6.2-4.2)
+    - _AuthorizationRequest_ supported parameters
+        - [`issuer_state`](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#section-5.1.3-2.3)
+    - _TokenResponse_ supported parameters
+        - [`c_nonce`](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#section-6.2-4.1)
+        - [`c_nonce_expires_in`](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#section-6.2-4.2)
 - [Pre-authorized-code flow](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-pre-authorized-code-flow)
-  - Not yet supported
+    - Not yet supported
 
 ### Environment Variables
 
-|Name|Description|
-|-|-|
-|`IDENTUS_URL`|URL of the Identus Cloud Agent to coordinate the issuance session.|
+| Name          | Description                                                                                                                                              |
+|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `IDENTUS_URL` | URL of the Identus Cloud Agent to coordinate the issuance session. If the variable is not set, the TokenResponse will not contain the `nonce` parameter. |

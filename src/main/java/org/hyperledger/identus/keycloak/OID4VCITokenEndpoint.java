@@ -36,10 +36,12 @@ public class OID4VCITokenEndpoint extends TokenEndpoint {
             Response originalResponse = super.createTokenResponse(user, userSession, clientSessionCtx, scopeParam, true, clientPolicyContextGenerator);
             AccessTokenResponse responseEntity = (AccessTokenResponse) originalResponse.getEntity();
 
-            String token = responseEntity.getToken();
-            NonceResponse nonceResponse = identusClient.getNonce(token, issuerState);
-            responseEntity.setOtherClaims(OID4VCIConstants.C_NONCE, nonceResponse.getNonce());
-            responseEntity.setOtherClaims(OID4VCIConstants.C_NONCE_EXPIRE, nonceResponse.getNonceExpiresIn());
+            if (identusClient.isIdentusUrlSet()) {
+                String token = responseEntity.getToken();
+                NonceResponse nonceResponse = identusClient.getNonce(token, issuerState);
+                responseEntity.setOtherClaims(OID4VCIConstants.C_NONCE, nonceResponse.getNonce());
+                responseEntity.setOtherClaims(OID4VCIConstants.C_NONCE_EXPIRE, nonceResponse.getNonceExpiresIn());
+            }
             return Response.fromResponse(originalResponse)
                     .entity(responseEntity)
                     .build();
