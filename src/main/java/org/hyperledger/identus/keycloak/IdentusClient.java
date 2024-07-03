@@ -17,15 +17,18 @@ public class IdentusClient {
 
     private static final Logger logger = Logger.getLogger(IdentusClient.class);
 
-    private final String identusUrl;
+    private final String identusUrl = System.getenv("IDENTUS_URL");
 
     private final Supplier<CloseableHttpClient> httpClient = IdentusClient::newCloseableHttpClient;
 
     public IdentusClient() {
-        this.identusUrl = System.getenv("IDENTUS_URL");
         if (this.identusUrl == null) {
-            throw new NullPointerException("The URL of identus client is null. The IDENTUS_URL environment variable is not set.");
+            logger.warn("The URL of the Identus Cloud Agent client is null. The IDENTUS_URL environment variable is not set. The token response will not contain a nonce.");
         }
+    }
+
+    public Boolean isIdentusUrlSet() {
+        return this.identusUrl != null;
     }
 
     public static CloseableHttpClient newCloseableHttpClient() {
