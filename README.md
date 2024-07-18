@@ -81,7 +81,7 @@ for customization using JAR providers.
 
 # Example
 
-- https://github.com/hyperledger/identus-cloud-agent/tree/main/examples/st-oid4vc
+- https://github.com/hyperledger/identus-cloud-agent/tree/main/examples/st-oid4vci
 
 # Available Plugins
 
