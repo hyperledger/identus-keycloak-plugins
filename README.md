@@ -79,6 +79,10 @@ Keycloak.
 Please refer to the official [Keycloak documentation](https://www.keycloak.org/server/containers)
 for customization using JAR providers.
 
+# Example
+
+- https://github.com/hyperledger/identus-cloud-agent/tree/main/examples/st-oid4vci
+
 # Available Plugins
 
 ## `identus-keycloak-oid4vci`
